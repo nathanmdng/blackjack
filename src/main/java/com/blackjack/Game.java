@@ -65,6 +65,9 @@ public class Game {
 	private List<Player> calculateWinners() {
 		// filter out any player who has busted
 		List<Player> playersInGame = players.stream().filter(p -> !p.busts()).collect(Collectors.toList());
+		if (playersInGame.isEmpty()) {
+			return new ArrayList<>();
+		}
 		// the best hand is the highest score of players who haven't busted
 		int bestHand = Collections.max(playersInGame.stream().map(p -> p.getFinalPoints()).collect(Collectors.toList()));
 		// anyone who has this score wins the game
